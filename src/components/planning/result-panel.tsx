@@ -30,7 +30,7 @@ const formatXAxis = (month: number) => {
     return ""
 }
 
-const formatTooltipValue = (value: number) => brl(value)
+const formatTooltipValue = (value: number | undefined) => brl(value ?? 0)
 
 interface ChartData {
     month: number
