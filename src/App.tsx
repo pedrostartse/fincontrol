@@ -4,9 +4,9 @@ import { Dashboard } from "@/pages/dashboard"
 import { TransactionsPage } from "./pages/transactions"
 import { LoginPage } from "./pages/auth/login"
 import { AuthGuard } from "./components/auth/auth-guard"
-import { GoalsPage } from "./pages/goals"
 import { SubscriptionsPage } from "./pages/subscriptions"
 import { InvestmentsPage } from "./pages/investments"
+import { PlanningPage } from "./pages/planning"
 
 function App() {
   return (
@@ -20,9 +20,10 @@ function App() {
       }>
         <Route path="/" element={<Dashboard />} />
         <Route path="/transactions" element={<TransactionsPage />} />
-        <Route path="/goals" element={<GoalsPage />} />
+        <Route path="/goals" element={<Navigate to="/planning" replace />} />
         <Route path="/subscriptions" element={<SubscriptionsPage />} />
         <Route path="/investments" element={<InvestmentsPage />} />
+        <Route path="/planning" element={<PlanningPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

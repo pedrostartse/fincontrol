@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
-import { LayoutDashboard, Wallet, Target, Plus, CalendarDays, TrendingUp, User } from "lucide-react"
+import { LayoutDashboard, Wallet, Plus, CalendarDays, TrendingUp, User, MapPin } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import { TransactionDialog } from "../transactions/transaction-dialog"
@@ -12,8 +12,8 @@ const navItemsStart = [
 ]
 
 const navItemsEnd = [
-    { name: "Metas", href: "/goals", icon: Target },
     { name: "Assinaturas", href: "/subscriptions", icon: CalendarDays },
+    { name: "Planejar", href: "/planning", icon: MapPin },
 ]
 
 export function MobileNav() {

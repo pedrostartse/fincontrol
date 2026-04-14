@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
 import { useTransactions } from "@/hooks/useTransactions"
 import { supabase } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import {
     Dialog,
-    DialogContent,
+    AnimatedDialogContent,
     DialogDescription,
     DialogHeader,
     DialogTitle,
@@ -77,10 +78,18 @@ export function TransactionDialog({
             const { data, error } = await supabase
                 .from('categories')
                 .select('id, name, type')
+                .order('name')
 
             if (error) throw error
             if (data) {
-                setCategories(data)
+                const seen = new Set<string>()
+                const unique = data.filter(cat => {
+                    const key = `${cat.name}-${cat.type}`
+                    if (seen.has(key)) return false
+                    seen.add(key)
+                    return true
+                })
+                setCategories(unique)
             }
         } catch (error) {
             console.error("Error fetching categories:", error)
@@ -140,13 +149,19 @@ export function TransactionDialog({
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 {trigger || (
-                    <Button className="gap-2">
-                        <PlusCircle className="h-4 w-4" />
+                    <Button className="gap-2 transition-transform duration-150 hover:scale-[1.04] active:scale-[0.94]">
+                        <motion.span
+                            animate={{ rotate: open ? 45 : 0 }}
+                            transition={{ type: "spring", stiffness: 350, damping: 20 }}
+                            className="inline-flex"
+                        >
+                            <PlusCircle className="h-4 w-4" />
+                        </motion.span>
                         Nova Transação
                     </Button>
                 )}
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <AnimatedDialogContent open={open} className="sm:max-w-[425px]">
                 <DialogHeader>
                     <DialogTitle>{isEditing ? "Editar Transação" : "Nova Transação"}</DialogTitle>
                     <DialogDescription>
@@ -256,7 +271,7 @@ export function TransactionDialog({
                         {loading ? "Salvando..." : (isEditing ? "Atualizar" : "Salvar Transação")}
                     </Button>
                 </form>
-            </DialogContent>
+            </AnimatedDialogContent>
         </Dialog>
     )
 }

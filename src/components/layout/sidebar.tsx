@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom"
-import { LayoutDashboard, Wallet, Target, PieChart, CalendarDays, TrendingUp, User } from "lucide-react"
+import { LayoutDashboard, Wallet, PieChart, CalendarDays, TrendingUp, User, MapPin } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ProfileDialog } from "./profile-dialog"
@@ -7,9 +7,9 @@ import { ProfileDialog } from "./profile-dialog"
 const navItems = [
     { name: "Dashboard", href: "/", icon: LayoutDashboard },
     { name: "Transações", href: "/transactions", icon: Wallet },
-    { name: "Metas", href: "/goals", icon: Target },
     { name: "Investimentos", href: "/investments", icon: TrendingUp },
     { name: "Assinaturas", href: "/subscriptions", icon: CalendarDays },
+    { name: "Planejamento", href: "/planning", icon: MapPin },
 ]
 
 export function Sidebar() {
